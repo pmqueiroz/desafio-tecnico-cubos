@@ -15,9 +15,7 @@ export default function Home() {
                <img src="https://images-na.ssl-images-amazon.com/images/I/81Um6M2W5kL._SL1372_.jpg" alt=""/>
                <div className="content">
                   <div className="header">
-                     <div className="rating">
-                        <span>75%</span>
-                     </div>
+                     <span className="rating">75%</span>
                      <h1>Thor: Ragnarok</h1>
                      <span className="relase-date">25/10/2017</span>
                   </div>

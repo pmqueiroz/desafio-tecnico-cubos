@@ -97,17 +97,16 @@ export const MovieCard = styled.div`
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            color: var(--color-text-in-primary);
+            font: 400 2.5rem Abel;
 
-            span {
-               color: var(--color-text-in-primary);
-               font: 400 2.5rem Abel;
+            &::after {
+               content: "";
+               position: absolute;
                border: 0.4rem solid var(--color-text-in-primary);
                border-radius: 50%;
-               width: 7rem;
-               height: 7rem;
-               display: flex;
-               align-items: center;
-               justify-content: center;
+               width: 6.5rem;
+               height: 6.5rem;
             }
          }
       }
@@ -151,6 +150,23 @@ export const Navigation = styled.div`
    }
 
    .active {
+      background: var(--color-primary);
+      color: var(--color-text-in-primary);
+      border-radius: 50%;
+      font: 400 2.5rem Abel;
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
+      &::after {
+         content: "";
+         position: absolute;
+         width: 3rem;
+         height: 3rem;
+         border: solid 0.2rem var(--color-text-in-primary);
+         border-radius: 50%;
+      }
    }
 `;

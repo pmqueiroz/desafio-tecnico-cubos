@@ -62,7 +62,7 @@ export default function Movie () {
                </div>
                <img src="https://images-na.ssl-images-amazon.com/images/I/81Um6M2W5kL._SL1372_.jpg" alt=""/>
             </div>
-            <iframe src="https://www.youtube.com/embed/v7MGUNV8MxU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/v7MGUNV8MxU" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
          </Main>
       </Container>
    );

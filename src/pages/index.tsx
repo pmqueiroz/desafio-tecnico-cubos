@@ -1,15 +1,29 @@
 import { Container, Header, Main, MovieCard, Navigation } from '../styles/pages/home';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import api from '../services/api';
 
 export default function Home() {
-   const inputValue = useState(null);
+   const [resultedMovies, setResultedMovies] = useState(null);
+   const [movieGenres, setMovieGenres] = useState(null);
+   const img_src = 'https://image.tmdb.org/t/p/w500';
+
+   useEffect(() => {
+      try {
+         api.get(`/genre/movie/list?api_key=${process.env.TMDB_AUTH}&language=pt-BR`).then (response => {
+            setMovieGenres(response.data.genres);
+            console.log(movieGenres);
+         })
+      } catch (error) {
+         console.log(error.message);
+      }
+   }, []);
 
    const handleSubmitSearch = useCallback((e) => {
       if(e.keyCode == 13){
          try {
-            const response = api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&language=pt-BR&include_adult=false`);
-            console.log(response);
+            api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${e.target.value}&language=pt-BR&include_adult=false`).then (response => {
+               setResultedMovies(response.data.results);
+            })
          } catch (error) {
             console.log(error.message);
          }
@@ -26,22 +40,33 @@ export default function Home() {
          <input type="text" onKeyDown={handleSubmitSearch} placeholder="Busque um filme por nome, ano ou gênero..." />
 
          <div className="results">
-            <MovieCard>
-               <img src="https://images-na.ssl-images-amazon.com/images/I/81Um6M2W5kL._SL1372_.jpg" alt=""/>
-               <div className="content">
-                  <div className="header">
-                     <span className="rating">75%</span>
-                     <h1>Thor: Ragnarok</h1>
-                     <span className="relase-date">25/10/2017</span>
-                  </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat rem repudiandae quibusdam totam? Pariatur asperiores qui iure quibusdam cupiditate deleniti neque, tempore assumenda quo perspiciatis corporis unde dolor rem iste? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae repudiandae nam, culpa porro velit perspiciatis, repellat aliquid ducimus reiciendis facere sequi architecto, neque itaque quasi? Tempore odio eveniet id voluptate. </p>
-                  <div className="tags">
-                     <span>Ação</span>
-                     <span>Aventura</span>
-                     <span>Fantasia</span>
-                  </div>
-               </div>
-            </MovieCard>
+            {
+               resultedMovies && resultedMovies.map(movie => (
+                  <MovieCard key={movie.id}>
+                     <img src={`${img_src}${movie.poster_path}`} alt={movie.title}/>
+                     <div className="content">
+                        <div className="header">
+                           <span className="rating">{movie.vote_average * 10}%</span>
+                           <a href={`/${movie.id}`}>
+                              <h1>{movie.title}</h1>
+                           </a>
+                           <span className="relase-date">{movie.release_date}</span>
+                        </div>
+                        <p>{movie.overview}</p>
+                        <div className="tags">
+                           {
+                              movie.genre_ids.map(genreId => {
+                                 var genre = movieGenres.find(genre => genre.id === genreId);
+                                 return (
+                                    <span>{genre.name}</span>
+                                 )
+                              })
+                           }
+                        </div>
+                     </div>
+                  </MovieCard>
+               ))
+            }
          </div>
        </Main>
          <Navigation>

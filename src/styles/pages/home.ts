@@ -64,6 +64,7 @@ export const MovieCard = styled.div`
       justify-content: start;
       align-items: flex-start;
       height: 100%;
+      flex: 1;
 
       .header {
          position: relative;

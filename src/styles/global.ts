@@ -21,6 +21,10 @@ export default createGlobalStyle`
       background: none;
    }
 
+   a {
+      text-decoration: none;
+   }
+
    body {
       background: var(--color-background);
       color: var(--color-text-base);

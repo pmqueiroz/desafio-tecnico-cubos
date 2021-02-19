@@ -32,6 +32,7 @@ export default createGlobalStyle`
       --color-text-base: #555555;
       --color-text-complement: #898989;
       --color-background: #FFFFFF;
+      --color-background-box: #F2F2F2;
       --color-background-darker: #EBEBEB;
    }
 
@@ -43,7 +44,7 @@ export default createGlobalStyle`
       border-radius: 0.5rem;
    }
    ::-webkit-scrollbar-thumb {
-      background: var(--color-placeholders);
+      background: var(--color-primary);
       border-radius: 0.5rem;
    }
    ::-webkit-scrollbar-corner { background: transparent; }

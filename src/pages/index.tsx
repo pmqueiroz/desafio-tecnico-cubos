@@ -1,6 +1,7 @@
 import { Container, Header, Main, MovieCard, Navigation } from '../styles/pages/home';
 import { useCallback, useState, useEffect } from 'react';
 import api from '../services/api';
+import dayjs from 'dayjs';
 
 export default function Home() {
    const [resultedMovies, setResultedMovies] = useState(null);
@@ -50,7 +51,9 @@ export default function Home() {
                            <a href={`/${movie.id}`}>
                               <h1>{movie.title}</h1>
                            </a>
-                           <span className="relase-date">{movie.release_date}</span>
+                           <span className="relase-date">{
+                              dayjs(movie.release_date).format('DD/MM/YYYY')
+                           }</span>
                         </div>
                         <p>{movie.overview}</p>
                         <div className="tags">

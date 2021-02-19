@@ -7,6 +7,7 @@ export const Container = styled.div`
    width: 100%;
    height: auto;
    flex-direction: column;
+   margin-bottom: 2rem;
 `;
 
 export const Header = styled.div`

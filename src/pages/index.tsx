@@ -1,6 +1,21 @@
 import { Container, Header, Main, MovieCard, Navigation } from '../styles/pages/home';
+import { useCallback, useState } from 'react';
+import api from '../services/api';
 
 export default function Home() {
+   const inputValue = useState(null);
+
+   const handleSubmitSearch = useCallback((e) => {
+      if(e.keyCode == 13){
+         try {
+            const response = api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&language=pt-BR&include_adult=false`);
+            console.log(response);
+         } catch (error) {
+            console.log(error.message);
+         }
+      }
+   }, []);
+
   return (
     <Container>
        <Header>
@@ -8,7 +23,7 @@ export default function Home() {
        </Header>
 
        <Main>
-         <input type="text" placeholder="Busque um filme por nome, ano ou gênero..." />
+         <input type="text" onKeyDown={handleSubmitSearch} placeholder="Busque um filme por nome, ano ou gênero..." />
 
          <div className="results">
             <MovieCard>

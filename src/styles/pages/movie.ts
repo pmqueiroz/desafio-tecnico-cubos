@@ -64,6 +64,7 @@ export const Main = styled.div`
 
    .content {
       margin: 2.5rem 0 0 4rem;
+      flex: 1;
 
       h1, h2 {
          color: var(--color-primary);

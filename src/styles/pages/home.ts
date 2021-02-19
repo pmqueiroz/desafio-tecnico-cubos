@@ -33,6 +33,10 @@ export const Main = styled.div`
    flex-direction: column;
    padding: 3rem 0;
 
+   .results {
+      width: 100%;
+   }
+
    input {
       width: 100%;
       background: var(--color-background-darker);

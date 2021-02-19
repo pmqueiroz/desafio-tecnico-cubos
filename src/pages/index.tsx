@@ -19,15 +19,17 @@ export default function Home() {
       }
    }, []);
 
-   const handleSubmitSearch = useCallback((e) => {
-      if(e.keyCode == 13){
-         try {
+   const handleSearchMovies = useCallback((e) => {
+      try {
+         if (e.target.value) {
             api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${e.target.value}&language=pt-BR&include_adult=false`).then (response => {
                setResultedMovies(response.data.results);
             })
-         } catch (error) {
-            console.log(error.message);
+         } else {
+            setResultedMovies(null);
          }
+      } catch (error) {
+         console.log(error.message);
       }
    }, []);
 
@@ -38,7 +40,7 @@ export default function Home() {
        </Header>
 
        <Main>
-         <input type="text" onKeyDown={handleSubmitSearch} placeholder="Busque um filme por nome, ano ou gênero..." />
+         <input type="text" onChange={handleSearchMovies} placeholder="Busque um filme por nome, ano ou gênero..." />
 
          <div className="results">
             {

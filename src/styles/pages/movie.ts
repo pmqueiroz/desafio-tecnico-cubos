@@ -72,6 +72,7 @@ export const Main = styled.div`
       p {
          margin: 1rem 0 3rem 0;
          max-width: 95%;
+         font-size: 1.8rem;
       }
 
       .info {

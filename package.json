@@ -11,10 +11,13 @@
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "dotenv": "^8.2.0",
+    "iso-language-codes": "^1.0.7",
     "next": "10.0.7",
+    "next-images": "^1.7.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "translate": "^1.2.1"
   },
   "devDependencies": {
     "@types/node": "^14.14.29",

@@ -55,13 +55,13 @@ export default function Home() {
                               dayjs(movie.release_date).format('DD/MM/YYYY')
                            }</span>
                         </div>
-                        <p>{movie.overview}</p>
+                        <p>{movie.overview ? movie.overview : "Este filme não possui sinopse registrada"}</p>
                         <div className="tags">
                            {
                               movie.genre_ids.map(genreId => {
                                  var genre = movieGenres.find(genre => genre.id === genreId);
                                  return (
-                                    <span>{genre.name}</span>
+                                    <span key={genreId}>{genre.name}</span>
                                  )
                               })
                            }

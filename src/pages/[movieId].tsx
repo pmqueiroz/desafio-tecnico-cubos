@@ -132,8 +132,6 @@ const Movie = ({
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                />
             }
-
-            {console.log(`https://www.youtube.com/embed/${youtube_key}`)}
          </Main>
       </Container>
    );

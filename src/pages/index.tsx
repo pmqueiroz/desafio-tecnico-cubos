@@ -1,32 +1,55 @@
-import { Container, Header, Main, MovieCard, Navigation } from '../styles/pages/home';
 import { useCallback, useState, useEffect } from 'react';
 import api from '../services/api';
+import { Container, Header, Main, MovieCard, Replacement } from '../styles/pages/home';
+import Navigation from '../components/Navigation';
 import dayjs from 'dayjs';
+import Lottie from 'react-lottie';
+import ClapperpaperAnimation from '../assets/clapperpaper.json';
+import coverReplacement from '../assets/cover-replacement.png';
 
 export default function Home() {
    const [resultedMovies, setResultedMovies] = useState(null);
    const [movieGenres, setMovieGenres] = useState(null);
+   const [resultedMoviesQtt, setResultedMoviesQtt] = useState(0);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [animationState, setAnimationState] = useState({
+      isStopped: false,
+      isPaused: false
+   })
    const img_src = 'https://image.tmdb.org/t/p/w500';
+   const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: ClapperpaperAnimation,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    };
 
    useEffect(() => {
       try {
          api.get(`/genre/movie/list?api_key=${process.env.TMDB_AUTH}&language=pt-BR`).then (response => {
             setMovieGenres(response.data.genres);
-            console.log(movieGenres);
          })
       } catch (error) {
          console.log(error.message);
       }
    }, []);
 
-   const handleSearchMovies = useCallback((e) => {
+   const handleChangePage = useCallback((numberPage: number) => {
+      setCurrentPage(numberPage);
+   }, [])
+
+   const handleSearchMovies = useCallback(e => {
       try {
          if (e.target.value) {
             api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${e.target.value}&language=pt-BR&include_adult=false`).then (response => {
                setResultedMovies(response.data.results);
+               setResultedMoviesQtt(response.data.total_results);
             })
          } else {
             setResultedMovies(null);
+            setResultedMoviesQtt(0);
          }
       } catch (error) {
          console.log(error.message);
@@ -44,9 +67,11 @@ export default function Home() {
 
          <div className="results">
             {
-               resultedMovies && resultedMovies.map(movie => (
+               resultedMovies 
+               ? 
+               resultedMovies.map(movie => (
                   <MovieCard key={movie.id}>
-                     <img src={`${img_src}${movie.poster_path}`} alt={movie.title}/>
+                     <img src={movie.poster_path ? img_src + movie.poster_path : '../assets/cover-replacement.png'} alt={movie.title}/>
                      <div className="content">
                         <div className="header">
                            <span className="rating">{movie.vote_average * 10}%</span>
@@ -71,16 +96,28 @@ export default function Home() {
                      </div>
                   </MovieCard>
                ))
+               : 
+               <Replacement>
+                  <Lottie
+                     options={defaultOptions}
+                     height={400}
+                     width={500}
+                     isStopped={animationState.isStopped}
+                     isPaused={animationState.isPaused}
+                  />
+                  <h1>Experimente buscar por um título ou gênero</h1>
+               </Replacement>
             }
          </div>
        </Main>
-         <Navigation>
-            <span>1</span>
-            <span>2</span>
-            <span className="active">3</span>
-            <span>4</span>
-            <span>5</span>
-         </Navigation>
+       {
+         resultedMoviesQtt &&
+         <Navigation 
+            moviesQuantity={resultedMoviesQtt} 
+            currentPage={currentPage} 
+            handleChangePage={handleChangePage} 
+         />
+       }
     </Container>
   )
 }

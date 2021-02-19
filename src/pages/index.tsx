@@ -5,13 +5,15 @@ import Navigation from '../components/Navigation';
 import dayjs from 'dayjs';
 import Lottie from 'react-lottie';
 import ClapperpaperAnimation from '../assets/clapperpaper.json';
-import coverReplacement from '../assets/cover-replacement.png';
 
 export default function Home() {
    const [resultedMovies, setResultedMovies] = useState(null);
+   const [searchQuerry, setSearchQuerry] = useState('');
    const [movieGenres, setMovieGenres] = useState(null);
    const [resultedMoviesQtt, setResultedMoviesQtt] = useState(0);
    const [currentPage, setCurrentPage] = useState(1);
+   const [pageIndexStart, setPageIndexStart] = useState(0);
+   const [pageIndexEnd, setPageIndexEnd] = useState(4);
    const [animationState, setAnimationState] = useState({
       isStopped: false,
       isPaused: false
@@ -25,36 +27,58 @@ export default function Home() {
         preserveAspectRatio: 'xMidYMid slice'
       }
     };
-
+   
    useEffect(() => {
       try {
-         api.get(`/genre/movie/list?api_key=${process.env.TMDB_AUTH}&language=pt-BR`).then (response => {
+         api.get(`/genre/movie/list?api_key=${process.env.TMDB_AUTH}&language=pt-BR`).then(response => {
             setMovieGenres(response.data.genres);
          })
+         
       } catch (error) {
          console.log(error.message);
       }
+
    }, []);
 
-   const handleChangePage = useCallback((numberPage: number) => {
+   const handleChangePageOnNav = useCallback((numberPage: number) => {
+      let calc = numberPage * 5;
+      
       setCurrentPage(numberPage);
-   }, [])
+      setPageIndexStart(calc - 5);
+      setPageIndexEnd(calc - 1);
+   }, [setCurrentPage,setPageIndexStart, setPageIndexEnd])
 
-   const handleSearchMovies = useCallback(e => {
+/*    const handleGetMovieList = useCallback(() => {
+      const pageToSearch = Math.floor((currentPage * 20) / 20);
+      console.log(searchQuerry);
+
       try {
-         if (e.target.value) {
+         api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${searchQuerry}&language=pt-BR&include_adult=false&page=${pageToSearch}`).then (response => {
+            setResultedMovies(response.data.results);
+            setResultedMoviesQtt(response.data.total_results);
+         })
+
+      } catch (error) {
+         console.log(searchQuerry);
+      }
+   }, []); */
+
+   const handleSearchMovies = e => {
+      if (e.target.value) {
+         try {
             api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${e.target.value}&language=pt-BR&include_adult=false`).then (response => {
                setResultedMovies(response.data.results);
                setResultedMoviesQtt(response.data.total_results);
             })
-         } else {
-            setResultedMovies(null);
-            setResultedMoviesQtt(0);
+   
+         } catch (error) {
+            console.log(searchQuerry);
          }
-      } catch (error) {
-         console.log(error.message);
+      } else {
+         setResultedMovies(null);
+         setResultedMoviesQtt(0);
       }
-   }, []);
+   };
 
   return (
     <Container>
@@ -69,7 +93,7 @@ export default function Home() {
             {
                resultedMovies 
                ? 
-               resultedMovies.map(movie => (
+               resultedMovies.slice(pageIndexStart, pageIndexEnd).map(movie => (
                   <MovieCard key={movie.id}>
                      <img src={movie.poster_path ? img_src + movie.poster_path : '../assets/cover-replacement.png'} alt={movie.title}/>
                      <div className="content">
@@ -115,7 +139,7 @@ export default function Home() {
          <Navigation 
             moviesQuantity={resultedMoviesQtt} 
             currentPage={currentPage} 
-            handleChangePage={handleChangePage} 
+            handleChangePage={handleChangePageOnNav} 
          />
        }
     </Container>

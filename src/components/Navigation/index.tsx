@@ -5,12 +5,14 @@ interface NavigationData {
    moviesQuantity: number;
    currentPage: number;
    handleChangePage: (value? : number) => void;
+   handleChangePagePerChevron: (value? : number) => void;
 }
 
  const Navigator: FunctionComponent<NavigationData> = ({
-   moviesQuantity,
+      moviesQuantity,
       currentPage,
-      handleChangePage
+      handleChangePage,
+      handleChangePagePerChevron
    }) => {
    const pageNumbers= [];
 
@@ -20,15 +22,17 @@ interface NavigationData {
 
    return (
          <Container isHidden={!moviesQuantity}>
-            {moviesQuantity && pageNumbers.map(pageNumber => (
+            <a onClick={() => handleChangePagePerChevron(-1)}>&#60;</a>
+            {moviesQuantity && pageNumbers.slice(currentPage - 3 < 0 ? 0 : currentPage - 3, currentPage + 2).map(pageNumber => (
                <span 
                   key={pageNumber} 
                   onClick={() => handleChangePage(pageNumber)}
                   className={currentPage === pageNumber ? 'active' : null}
                >
-                     {pageNumber}
+                  {pageNumber}
                </span>
             ))}
+            <a onClick={() => handleChangePagePerChevron(1)}>&#62;</a>
          </Container>
       )
 }

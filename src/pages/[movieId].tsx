@@ -45,15 +45,15 @@ const Movie = ({
    poster_path,
    youtube_key
 }: MovieData) => {
-   const [translatedStatus, setTranslatedStatus] = useState('');
-   const [translatedLanguage, setTranslatedLanguage] = useState('');
+   const [translatedStatus, setTranslatedStatus] = useState('Traduzindo...');
+   const [translatedLanguage, setTranslatedLanguage] = useState('Traduzindo...');
 
    const img_src = 'https://image.tmdb.org/t/p/w500';
 
    let watchtime_hours = Math.floor(runtime / 60);
    let watchtime_minutes = runtime % 60;
 
-   const watchtime = `${watchtime_hours}h${watchtime_minutes}min`;
+   const watchtime = `${watchtime_hours}h ${watchtime_minutes}min`;
 
    useEffect( () => {
       translate(by639_1[original_language].name, {to: 'pt', engine: 'libre'}).then(response => {
@@ -101,17 +101,17 @@ const Movie = ({
 
                         <div>
                            <h2>Orçamento</h2>
-                           <span>${budget},00</span>
+                           <span>${budget.toString().match(/.{1,3}/g).join('.')},00</span>
                         </div>
 
                         <div>
                            <h2>Receita</h2>
-                           <span>${revenue},00</span>
+                           <span>${revenue.toString().match(/.{1,3}/g).join('.')},00</span>
                         </div>
 
                         <div>
                            <h2>Lucro</h2>
-                           <span>${revenue - budget},00</span>
+                           <span>${(revenue - budget).toString().match(/.{1,3}/g).join('.')},00</span>
                         </div>
                      </div>
                      <div className="footer">

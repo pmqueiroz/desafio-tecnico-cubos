@@ -42,7 +42,7 @@ export const Main = styled.div`
       padding: 0 3rem;
 
       h1 {
-         font: 400 3.2rem Abel;
+         font: 600 4rem Abel;
          color: var(--color-primary);
       }
 
@@ -63,11 +63,16 @@ export const Main = styled.div`
    }
 
    .content {
-      margin: 2.5rem 0 0 4rem;
+      margin: 2.5rem 0 0 3rem;
       flex: 1;
 
       h1, h2 {
          color: var(--color-primary);
+         font-size: 2.5rem;
+      }
+
+      h2 {
+         font-size: 2rem;
       }
 
       p {

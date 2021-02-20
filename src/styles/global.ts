@@ -5,6 +5,7 @@ export default createGlobalStyle`
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none;
    }
 
    *:focus {
@@ -52,6 +53,7 @@ export default createGlobalStyle`
       border-radius: 0.5rem;
    }
    ::-webkit-scrollbar-corner { background: transparent; }
+   
    @media (min-width: 850px) {
       :root{
          font-size: 62.5%

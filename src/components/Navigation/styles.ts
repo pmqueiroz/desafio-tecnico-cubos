@@ -13,6 +13,18 @@ export const Container = styled.nav<iContainer>`
       display: none;
    `}
 
+   a {
+      cursor: pointer;
+      
+      &:first-of-type {
+         margin: 0 1rem 0 0;
+      }
+
+      &:last-of-type {
+         margin: 0 0 0 1rem;
+      }
+   }
+
    span {
       color: var(--color-primary);
       cursor: pointer;

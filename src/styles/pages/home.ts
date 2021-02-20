@@ -8,6 +8,7 @@ export const Container = styled.div`
    height: auto;
    flex-direction: column;
    margin-bottom: 2rem;
+   overflow-x: hidden;
 `;
 
 export const Header = styled.div`

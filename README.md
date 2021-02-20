@@ -4,6 +4,7 @@
 -->
 
 <!-- VARS -->
+[issues-url]: https://github.com/pmqueiroz/desafio-tecnico-cubos/issues/
 [node-url]: https://nodejs.org/en
 [yarn-url]: https://classic.yarnpkg.com/
 [npm-url]:  https://www.npmjs.com/
@@ -71,6 +72,12 @@ To start as production mode run the commands
 $ yarn build
 $ yarn start
 ```
+
+### Issues 🐛
+
+#### Report
+
+In case you are having any problem do not be shy to report to us in [Issues][issues-url] session.
 
 ### Todo 📌
 

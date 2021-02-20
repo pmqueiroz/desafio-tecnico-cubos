@@ -14,7 +14,7 @@ interface NavigationData {
    }) => {
    const pageNumbers= [];
 
-   for(let index = 1; index <= Math.ceil(moviesQuantity / 5); index++){
+   for (let index = 1; index <= Math.ceil(moviesQuantity / 5); index++){
       pageNumbers.push(index);
    }
 

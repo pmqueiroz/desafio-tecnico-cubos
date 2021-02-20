@@ -46,6 +46,22 @@ export default function Home() {
       setCurrentPage(numberPage);
       setPageIndexStart(calc - 5);
       setPageIndexEnd(calc - 1);
+
+      const pageToSearch = Math.floor((currentPage * 20) / 20);
+
+      console.log(pageToSearch);
+
+      if (pageToSearch > 1) {
+         try {
+            api.get(`/search/movie?api_key=${process.env.TMDB_AUTH}&query=${searchQuerry}&language=pt-BR&include_adult=false&page=${pageToSearch}`).then (response => {
+               setResultedMovies(response.data.results);
+               setResultedMoviesQtt(response.data.total_results);
+            })
+         } catch (error) {
+            console.log(searchQuerry);
+         }
+      }
+
    }, [setCurrentPage,setPageIndexStart, setPageIndexEnd])
 
 /*    const handleGetMovieList = useCallback(() => {

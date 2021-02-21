@@ -13,7 +13,7 @@ export const Container = styled.nav<iContainer>`
       display: none;
    `}
 
-   a {
+   svg {
       cursor: pointer;
       
       &:first-of-type {

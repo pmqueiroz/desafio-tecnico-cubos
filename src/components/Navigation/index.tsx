@@ -1,4 +1,5 @@
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { Container } from './styles';
 
 interface NavigationData {
@@ -22,7 +23,7 @@ interface NavigationData {
 
    return (
          <Container isHidden={!moviesQuantity}>
-            <a onClick={() => handleChangePagePerChevron(-1)}>&#60;</a>
+            <FiChevronLeft onClick={() => handleChangePagePerChevron(-1)} />
             {moviesQuantity && pageNumbers.slice(currentPage - 3 < 0 ? 0 : currentPage - 3, currentPage + 2).map(pageNumber => (
                <span 
                   key={pageNumber} 
@@ -32,7 +33,7 @@ interface NavigationData {
                   {pageNumber}
                </span>
             ))}
-            <a onClick={() => handleChangePagePerChevron(1)}>&#62;</a>
+            <FiChevronRight onClick={() => handleChangePagePerChevron(1)} />
          </Container>
       )
 }

@@ -110,12 +110,14 @@ export default function Home() {
                      <div className="content">
                         <div className="header">
                            <span className="rating">{movie.vote_average * 10}%</span>
-                           <a href={`/${movie.id}`}>
-                              <h1>{movie.title}</h1>
-                           </a>
-                           <span className="relase-date">{
-                              dayjs(movie.release_date).format('DD/MM/YYYY')
+                           <div className="main-info">
+                              <a href={`/${movie.id}`}>
+                                 <h1>{movie.title}</h1>
+                              </a>
+                              <span className="relase-date">{
+                                 dayjs(movie.release_date).format('DD/MM/YYYY')
                            }</span>
+                           </div>
                         </div>
                         <p>{movie.overview ? movie.overview : "Este filme não possui sinopse registrada"}</p>
                         <div className="tags">

@@ -173,6 +173,10 @@ export const Main = styled.div`
          }
       }
 
+      .footer {
+         margin-bottom: 2rem;
+      }
+
       .horizontal-wrapper {
          img {
             display: none;

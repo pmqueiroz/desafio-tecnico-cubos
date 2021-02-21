@@ -82,12 +82,24 @@ export const Main = styled.div`
          color: var(--color-primary);
       }
    }
+
+   @media (max-width: 850px) {
+      input {
+         font: 400 1.8rem Abel;
+         padding: 2rem 3rem;
+
+         &::placeholder {
+            font: 400 2.5rem Abel;
+         }
+      }
+   }
+
 `;
 
 export const MovieCard = styled.div`
    display: flex;
    justify-content: center;
-   align-items: center;
+   align-items: start;
    width: 100%;
    margin-top: 3rem;
    height: 37rem;
@@ -162,6 +174,7 @@ export const MovieCard = styled.div`
 
       .tags {
          margin-left: 2rem;
+         margin-bottom: 2rem;
 
          span {
             background: var(--color-background);
@@ -180,6 +193,8 @@ export const MovieCard = styled.div`
    @media (max-width: 850px) {
       position: relative;
       border-radius: 1rem;
+      min-height: 37rem;
+      height: auto;
 
       img {
          height: auto;
@@ -191,19 +206,32 @@ export const MovieCard = styled.div`
       }
 
       .content {
+         p {
+            max-height: unset;
+         }
+
          .header {
-            margin-bottom: 5rem;
+            .main-info {
+               display: flex;
+               align-items: start;
+               justify-content: center;
+               flex-direction: column;
+               height: 15.5rem;
+               margin-left: 12rem;
+            }
 
             h1 {
                background: none;
-               padding-left: 12rem;
-               margin-top: 5rem;
-               max-width: 35rem;
+               width: calc(100% - 9rem);
+               margin: 0;
                color: var(--color-primary);
+               position: unset;
+               padding: 0;
+               height: auto;
             }
 
             .relase-date {
-               margin-left: 12rem;
+               margin-left: 0;
             }
 
             .rating {
@@ -213,7 +241,7 @@ export const MovieCard = styled.div`
          }
 
          p {
-            margin-top: 0;
+            margin-top: 2rem;
          }
       }
    }

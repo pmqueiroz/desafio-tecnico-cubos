@@ -8,7 +8,6 @@
 [node-url]: https://nodejs.org/en
 [yarn-url]: https://classic.yarnpkg.com/
 [npm-url]:  https://www.npmjs.com/
-[expo-url]: https://expo.io/
 
 <!-- VARS -->
 
@@ -20,7 +19,7 @@
 
 <br>
 <div align="center">
-    Web platform to serch movies integrated with TMDB Api made with React.js using create-next-app and Typescript
+    Web platform to serch movies integrated with TMDB Api made with React.js using NextJs and Typescript
 </div>
 
 
@@ -49,7 +48,6 @@ $ cd desafio-tecnico-cubos
 #### Requirements
 * [Node.js][node-url]
 * [Yarn][yarn-url] or [npm][npm-url]
-* [Expo][expo-url]
 
 > If you don't have yarn installed use npm instead to run all codes bellow
 

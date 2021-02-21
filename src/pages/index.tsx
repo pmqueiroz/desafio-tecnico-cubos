@@ -30,7 +30,7 @@ export default function Home() {
     };
    
     useEffect(() => {
-      const pageToSearch = Math.floor(((currentPage - 1) * 5 / 20) + 1);
+      const pageToSearch = Math.floor(((currentPage) * 5 / 20) + 1);
 
       try {
          api.get(`/genre/movie/list?api_key=${process.env.TMDB_AUTH}&language=pt-BR`).then(response => {

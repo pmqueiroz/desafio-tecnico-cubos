@@ -150,4 +150,41 @@ export const Main = styled.div`
       height: calc(100vw * 0.5625);
       margin-top: 5rem;
    }
+
+   @media (max-width: 850px) {
+      .title {
+         height: auto;
+         h1 {
+            font: 600 4rem Abel;
+            text-align: center;
+         }
+         img {
+            height: 25rem;
+            border-radius: 1rem;
+            margin: 3rem 0;
+         }
+      }
+
+      .content {
+         .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+         }
+      }
+
+      .horizontal-wrapper {
+         img {
+            display: none;
+         }
+      }
+   }
+
+   @media (min-width: 850px) {
+      .title {
+         img {
+            display: none;
+         }
+      }
+   }
 `;

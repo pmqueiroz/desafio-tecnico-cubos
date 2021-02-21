@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import api from '../services/api';
-import { Container, Header, Main, MovieCard, Replacement } from '../styles/pages/home';
+import { Container, Header, Main, MovieCard, Replacement, Animation } from '../styles/pages/home';
 import Navigation from '../components/Navigation';
 import dayjs from 'dayjs';
 import Lottie from 'react-lottie';
@@ -133,7 +133,7 @@ export default function Home() {
                ))
                : 
                <Replacement>
-                  <Lottie
+                  <Animation
                      options={defaultOptions}
                      height={400}
                      width={500}

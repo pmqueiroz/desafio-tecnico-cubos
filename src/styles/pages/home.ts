@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
 
 export const Container = styled.div`
    display: flex;
@@ -25,6 +26,13 @@ export const Header = styled.div`
    }
 `;
 
+export const Animation = styled(Lottie)`
+   @media (max-width: 850px) {
+      display: none;
+      background: red;
+   }
+`;
+
 export const Replacement = styled.div`
    display: flex;
    justify-content: center;
@@ -36,6 +44,17 @@ export const Replacement = styled.div`
    h1 {
       font: 400 4rem Abel;
       color: var(--color-primary);
+   }
+
+   @media (max-width: 850px) {
+      div {
+         display: none;
+      }
+
+      h1 {
+         margin-top: 2rem;
+         text-align: center;
+      }
    }
 `;
 
@@ -76,6 +95,7 @@ export const MovieCard = styled.div`
 
    img {
       height: 100%;
+      max-width: 24.6rem
    }
 
    .content {
@@ -153,6 +173,47 @@ export const MovieCard = styled.div`
             & + span {
                margin-left: 1rem;
             }
+         }
+      }
+   }
+
+   @media (max-width: 850px) {
+      position: relative;
+      border-radius: 1rem;
+
+      img {
+         height: auto;
+         max-width: 9rem;
+         position: absolute;
+         top: 2rem;
+         left: 2.3rem;
+         border-radius: 1rem;
+      }
+
+      .content {
+         .header {
+            margin-bottom: 5rem;
+
+            h1 {
+               background: none;
+               padding-left: 12rem;
+               margin-top: 5rem;
+               max-width: 35rem;
+               color: var(--color-primary);
+            }
+
+            .relase-date {
+               margin-left: 12rem;
+            }
+
+            .rating {
+               right: 1rem;
+               left: unset;
+            }
+         }
+
+         p {
+            margin-top: 0;
          }
       }
    }

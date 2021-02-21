@@ -73,6 +73,7 @@ const Movie = ({
          </Header>
          <Main>
             <div className="title">
+               <img src={`${img_src}${poster_path}`} alt={title}/>
                <h1>{title}</h1>
                <span>{dayjs(release_date).format('DD/MM/YYYY')}</span>
             </div>

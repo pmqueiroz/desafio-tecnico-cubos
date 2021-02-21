@@ -59,4 +59,10 @@ export default createGlobalStyle`
          font-size: 62.5%
       }
    }
+
+   @media (max-width: 850px) {
+      :root{
+         font-size: 40.5%
+      }
+   }
 `;

@@ -87,4 +87,4 @@ In case you are having any problem do not be shy to report to us in [Issues][iss
 - [x] Show movie details on a single page
 - [x] Perf (SSR)
 - [x] Layout
-- [ ] Responsive
+- [x] Responsive
